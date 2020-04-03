@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ER: List of patients</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a th:href="@{/}">Main</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Patient list</li>
+	  </ol>
+	</nav>
+	<h2 class="pb-2 text-center" >Patient list</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Name</th>
+				<th>Room Number</th>
+				<th>Status</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="Patient : ${patients}" >
+				<td><a class="btn btn-outline-primary btn-sm" th:href="@{/patientDetails/{id}(id=${Patient.getId()})}">View Details</a></td>
+				<td th:text="${Patient.getLastName()} + ', ' + ${Patient.getFirstName()}"></td>
+				<td th:text="${Patient.getRoomNo()}"></td>
+				<td th:text="${Patient.getStatus().getName()}"></td>
+				<td><a class="btn btn-info btn-sm" th:href="@{/update/{id}(id=${Patient.getId()})}">Update</a></td>
+				<td><a class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${Patient.getId()})}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

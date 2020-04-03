@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Login to Emergency Room Service</title>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    </head>
+    <body>
+    	<br>
+    	<h3 class="pb-2 text-center" >Emergency Room Login page</h3>
+    	<div class="text-center">
+    		<div th:if="${param.error}">
+	            Invalid username and password.
+	        </div>
+	        <div th:if="${param.logout}">
+	            You have been logged out.
+	        </div>
+	    </div>
+        <br>
+        <div class="text-center" >
+        	<form class="border border-info pt-4 pb-3" th:action="@{/login}" method="post">
+	            <div><label> Username : <input type="text" name="username"/> </label></div>
+	            <div><label> Password: <input type="password" name="password"/> </label></div>
+	            <input class="mt-1 btn btn-success" type="submit" value="Sign In"/>
+	        </form>
+        </div>
+    </body>
+</html>

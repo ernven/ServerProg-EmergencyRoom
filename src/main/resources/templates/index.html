@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>ER System - Main Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h5 class="ml-3 mt-2 mb-0" >Hello, [[${#httpServletRequest.remoteUser}]]!</h5><br>
+	<h2 class="pt-4 text-center mb-4" >Welcome to the ER system</h2>
+	<div class="text-center" >
+		<!-- First two buttons display for admins only -->
+		<div sec:authorize="hasAuthority('ADMIN')" >
+			<a href="/addUser" class="btn btn-warning w-25 mt-5">Add a new user</a><br>
+			<span class="mb-6 d-block" ></span>
+			<a href="/userList" class="btn btn-warning w-25 mt-5">View existing users</a><br>
+			<span class="mb-6 d-block" ></span>
+		</div>
+		<a href="/add"  class="btn btn-primary w-25 mt-5">Add a new patient</a><br>
+		<span class="mb-6 d-block" ></span>
+		<a href="/patientList" class="btn btn-primary w-25 mt-5">List existing patients</a><br>
+		<span class="mb-6 d-block" ></span>
+		<form th:action="@{/logout}" method="POST">
+			<input class="btn btn-danger w-25 mt-5" type="submit" value="Sign Out" />
+		</form>
+	</div>
+</body>
+</html>

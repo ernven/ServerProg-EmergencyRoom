@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ER: List of patients</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a th:href="@{/}">Main</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">User list</li>
+	  </ol>
+	</nav>
+	<h2 class="pb-2 text-center" >User list</h2>
+	<table class="table table-striped pr-5">
+		<thead>
+			<tr>
+				<th class="pl-5" >Username</th>
+				<th>email</th>
+				<th>Role</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="User : ${users}">
+				<td class="pl-5" th:text="${User.getUsername()}"></td>
+				<td th:text="${User.getEmail()}"></td>
+				<td class="pr-3" th:text="${User.getRole()}"></td>
+				<td><a class="btn btn-info btn-sm pl-4 pr-4 ml-5 mr-3" th:href="@{/updateUser/{id}(id=${User.getId()})}">Edit</a></td>
+				<td><a class="btn btn-danger btn-sm pl-3 pr-3 ml-3 mr-3"
+					th:if="${User.getUsername() != 'admin'}"
+					th:href="@{/deleteUser/{id}(id=${User.getId()})}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
