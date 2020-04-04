@@ -22,7 +22,8 @@ public class EmergencyRoomApplication {
 		SpringApplication.run(EmergencyRoomApplication.class, args);
 	}
 
-/*
+/*	This method adds some data entries for testing purposes
+ 
 	@Bean
 	public CommandLineRunner demo(PatientRepository patRepo, StatusRepository statusRepo, UserRepository userRepo) {
 		return (args) -> {

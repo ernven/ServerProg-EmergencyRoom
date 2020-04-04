@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import com.example.EmergencyRoom.domain.User;
 import com.example.EmergencyRoom.domain.UserRepository;
 
+//We have a second controller implemented
+//It is used to handle the administration of users
+
 @Controller
 public class EmerRoomAdminController {
 	
@@ -28,6 +31,7 @@ public class EmerRoomAdminController {
 	
 	
 	//The methods in this class will be restricted to ADMIN role users only
+	//We use the PreAuthorize annotation to handle it, checking the users' roles
 	@GetMapping("/userList")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String listUsers(Model model) {

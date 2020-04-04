@@ -19,8 +19,11 @@ import com.example.EmergencyRoom.domain.Patient;
 import com.example.EmergencyRoom.domain.PatientRepository;
 import com.example.EmergencyRoom.domain.StatusRepository;
 
+//This is the primary controller
+//It handles the operations relevant to the patients in the system
+
 @Controller
-public class EmerRoomUserController {
+public class EmerRoomPatientController {
 	
 	@Autowired
 	private PatientRepository patientRepo;
