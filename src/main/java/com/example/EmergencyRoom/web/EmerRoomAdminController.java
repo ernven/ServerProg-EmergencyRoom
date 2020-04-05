@@ -1,5 +1,7 @@
 package com.example.EmergencyRoom.web;
 
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,7 @@ public class EmerRoomAdminController {
 	
 	@GetMapping("/updateUser/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String updateUser(@PathVariable("id") Long userId, Model model) {
+	public String updateUser(@PathVariable("id") UUID userId, Model model) {
 		model.addAttribute("user", userRepo.findById(userId));
 		return "updateUser";
 	}
@@ -82,12 +84,12 @@ public class EmerRoomAdminController {
 		String hashedPassword = passwordEncoder.encode(user.getPasswordHash());
 		user.setPasswordHash(hashedPassword);
 		userRepo.save(user);
-		return "redirect:/";
+		return "redirect:/userList";
 	}
 	
 	@GetMapping("/deleteUser/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String deleteUser(@PathVariable("id") Long userId, Model model) {
+	public String deleteUser(@PathVariable("id") UUID userId, Model model) {
 		userRepo.deleteById(userId);
 		return "redirect:../userList";
 	}

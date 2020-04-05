@@ -30,10 +30,10 @@ public class EmergencyRoomApplication {
 			//We create some users and add them to the repository
 			//password is testadmin
 			userRepo.save(new User("admin",
-					"$2y$12$Epf2ysKHbxeUelDM1ELQHOguodNm0CNHncAuv7GONV04Vpd56qs9a", "admin@health.fi", "ADMIN"));
+					"", "admin@health.fi", "ADMIN"));
 			//pwd is testdoctor
-			userRepo.save(new User("dr.roberts",
-					"$2y$12$Wd2IaG2SPpcvHyuCLKrMw.la.YMZQlU5AeKHt1DdkEcYJeKLpLBx.", "roberts@health.fi", "DOCTOR"));
+			userRepo.save(new User("doctor",
+					"", "roberts@health.fi", "DOCTOR"));
 
 			//We create the available status options
 			statusRepo.save(new Status("Cleared"));

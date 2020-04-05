@@ -1,5 +1,7 @@
 package com.example.EmergencyRoom.domain;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,14 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//This class is for the system users
+//They will be stored in the database
+
 @Entity
 @Table(name = "users")
 public class User {
 	//IDs are auto-generated and not updatable. They also cannot be null.
+	// Instead of Long, we use type UUID to make primary keys harder to guess
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, updatable = false)
-	private Long id;
+	private UUID id;
 
 	// Usernames must be unique
 	@Column(name = "username", nullable = false, unique = true)
@@ -39,11 +45,11 @@ public class User {
 		this.role = role;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

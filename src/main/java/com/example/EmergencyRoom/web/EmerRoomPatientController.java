@@ -101,5 +101,4 @@ public class EmerRoomPatientController {
 	public @ResponseBody Optional<Patient> findPatientRest(@PathVariable("id") Long id) {
 		return patientRepo.findById(id);
 	}
-	
 }

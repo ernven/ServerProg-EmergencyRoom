@@ -12,13 +12,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.EmergencyRoom.domain.UserDetailsServiceImpl;
 
+//In this class we configure Spring Security
+
+//First we use the annotation to enable Spring Security Web Support
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	//We use our implementation of UserDetailsService
+	
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
+	
+	//We use BCrypt to encrypt passwords so they are not stored in plaintext
+	//We are using 12 rounds for the hashing
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,21 +39,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    return new BCryptPasswordEncoder(12);
 	}
 	
+	// We set here the config also to use HTTPS with Heroku
+	// They provide the secure environment for apps on their service,
+	// this is to handle the routing
+	
 	@Override
 	protected void configure (HttpSecurity http) throws Exception {
 		http
+			.requiresChannel()
+		    	.requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+		    	.requiresSecure()
+		    	.and()
 			.authorizeRequests()
 				.antMatchers("/css/**").permitAll()
-				.antMatchers("/userList", "/updateUser/**", "/deleteUser/**").hasAuthority("ADMIN")  //endpoints only allowed for admins
+				// The following endpoints only allowed for admins
+				.antMatchers("/userList", "/updateUser/**", "/deleteUser/**").hasAuthority("ADMIN") 
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/")
+				.defaultSuccessUrl("/", true)
 				.permitAll()
 				.and()
 			.logout()
 				.permitAll();
-				//.invalidateHttpSession(true); //this invalidates the session at logout for security
 	}
 }

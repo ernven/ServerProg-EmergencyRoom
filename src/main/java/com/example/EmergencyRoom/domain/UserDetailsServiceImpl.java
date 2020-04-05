@@ -7,8 +7,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+//This implementation of UserDetailsService will be used to authenticate and authorize users
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+	
 	private final UserRepository repository;
 	
 	@Autowired

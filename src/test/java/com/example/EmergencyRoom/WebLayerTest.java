@@ -71,23 +71,23 @@ public class WebLayerTest {
 	@Test
 	public void testLoginSuccessful() throws Exception {
 		this.mockMvc
-	    	.perform(formLogin("/login").user("admin").password("testadmin"))
+	    	.perform(formLogin("/login").user("").password(""))
 			.andExpect(authenticated());
 	}
 	
 	//Now we test the handling of requests for authenticated users
 	
 	@Test
-	@WithUserDetails("testdoctor")
+	@WithUserDetails("doctor")
 	public void testMainPage()throws Exception {
 		this.mockMvc
 	    	.perform(get("/"))
 	    	.andDo(print()).andExpect(status().isOk())
-			.andExpect(content().string(containsString("Hello, testdoctor")));
+			.andExpect(content().string(containsString("Hello, doctor")));
 	}
 	
 	@Test
-	@WithUserDetails("testdoctor")
+	@WithUserDetails("doctor")
 	public void testPatientList()throws Exception {
 		this.mockMvc
 	    	.perform(get("/patientList"))
@@ -98,7 +98,7 @@ public class WebLayerTest {
 	//One more test, with role limitations
 	
 	@Test
-	@WithUserDetails("testdoctor")
+	@WithUserDetails("doctor")
 	public void testAdminPageDoc()throws Exception {
 		this.mockMvc
 	    	.perform(get("/userList"))
