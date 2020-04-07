@@ -3,7 +3,7 @@ package com.example.EmergencyRoom;
 import java.net.URISyntaxException;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 //Documentation for this has been found in Heroku Dev Center
 
 @Configuration
+@EnableCaching
 public class MainConfig {
 
     @Bean
