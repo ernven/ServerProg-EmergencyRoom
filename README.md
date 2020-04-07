@@ -1,4 +1,4 @@
-# ServerProg-EmergencyRoom
+# Server Programming - Emergency Room project
 
 Final project for my Server Programming class based on a system for patient administration in an emergency room.
 
