@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.EmergencyRoom.domain.Patient;
 import com.example.EmergencyRoom.domain.PatientRepository;
+import com.example.EmergencyRoom.domain.Status;
 import com.example.EmergencyRoom.domain.StatusRepository;
 
 //This is the primary controller
@@ -89,6 +90,8 @@ public class EmerRoomPatientController {
 	}
 
 	//Here on we define the RESTful methods
+	//Our methods will be on the root endpoint, and Spring default ones will be under /api
+	
 	
 	//This method uses REST to return all patients
 	@GetMapping("/patients")
@@ -97,8 +100,20 @@ public class EmerRoomPatientController {
 	}
 	
 	//This method uses REST to return a patient by their ID
-	@GetMapping("/patient/{id}")
+	@GetMapping("/patients/{id}")
 	public @ResponseBody Optional<Patient> findPatientRest(@PathVariable("id") Long id) {
 		return patientRepo.findById(id);
+	}
+	
+	//This method uses REST to return all of the statuses
+	@GetMapping("/statuses")
+	public @ResponseBody List<Status> statusListRest() {
+		return (List<Status>) statusRepo.findAll();
+	}
+
+	//This method uses REST to return a particular status by their ID
+	@GetMapping("/statuses/{id}")
+	public @ResponseBody Optional<Status> findStatusRest(@PathVariable("id") Long statusId) {
+		return statusRepo.findById(statusId);
 	}
 }

@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/css/**").permitAll()
 				// The following endpoints only allowed for admins
-				.antMatchers("/userList", "/updateUser/**", "/deleteUser/**").hasAuthority("ADMIN") 
+				.antMatchers("/userList", "/updateUser/**", "/deleteUser/**", "/api/users", "/api/users/**").hasAuthority("ADMIN") 
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

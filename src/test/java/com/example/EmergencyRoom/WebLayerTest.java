@@ -114,17 +114,16 @@ public class WebLayerTest {
 			.andExpect(content().string(containsString("Username")));
 	}
 	
-	//Last, we test REST api in our controller
-	//Here we also try a different way,
-	//Using WithMockUser instead of the user details
+	//Last, we test our own REST implementation in our controller
+	//Here we also try a different way, using WithMockUser instead of the user details
 	@Test
 	@WithMockUser(roles={"DOCTOR"})
 	public void testListPatientsRest() throws Exception {
 		this.mockMvc
-			.perform(get("/api/patients"))
+			.perform(get("/patients"))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect(content().string(containsString("content")));
+			.andExpect(content().string(containsString("firstName")));
 	}
 
 }
