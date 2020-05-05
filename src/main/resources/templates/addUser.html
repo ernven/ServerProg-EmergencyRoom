@@ -29,9 +29,13 @@
 				<input class="form-control" type="text" id="email" th:field="*{email}" />
 			</div>
 		</div>
-		<div class="form-group pl-0 col-md-9">
+		<div class="form-group" >
 			<label>Role</label>
-			<input class="form-control" type="text" id="role" th:field="*{role}" />
+			<select id="role" th:field="*{role}"
+				class="form-control browser-default custom-select col-md-7" >
+	   			<option th:value="'ADMIN'" th:text="Admin"></option>
+	   			<option th:value="'DOCTOR'" th:text="Doctor"></option>
+	   		</select>
 		</div>
 		<div class="form-group mb-5">
 			<input
